@@ -20,7 +20,7 @@
                 <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="Product.html">Product Creator <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="Product.html">Keyboard Creator <span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>
@@ -41,11 +41,9 @@
                 <img style="filter: blur(2px); -webkit-filter: blur(2px); height: 225px; width: 100%; display: block;" class="card-img-top" src="./img/Chassis.jpg" data-holder-rendered="true">
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Chassis</div>
                 <div style="margin: auto;" class="card-body">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-control" id="chassisSelect">
+                        <option>Plastic</option>
+                        <option>Metal</option>
                     </select>
                 </div>
             </div>
@@ -56,11 +54,9 @@
                 <img style="filter: blur(1px); -webkit-filter: blur(1px); height: 225px; width: 100%; display: block;" class="card-img-top" src="./img/Switches.jpg" data-holder-rendered="true">
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.5); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Switches</div>
                 <div style="margin: auto;" class="card-body">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-control" id="switchSelect">
+                        <option>Cherry MX Brown</option>
+                        <option>Cherry MX Blue</option>
                     </select>
                 </div>
             </div>
@@ -72,11 +68,9 @@
 
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Keycaps</div>
                 <div style="margin: auto;" class="card-body">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-control" id="capSelect">
+                        <option>ABS</option>
+                        <option>PBT</option>
                     </select>
                 </div>
             </div>
@@ -88,11 +82,10 @@
 
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Lighting</div>
                 <div style="margin: auto;" class="card-body">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-control" id="lightSelect">
+                        <option>None</option>
+                        <option>White</option>
+                        <option>RGB</option>
                     </select>
                 </div>
             </div>
@@ -104,11 +97,12 @@
 
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Color</div>
                 <div style="margin: auto;" class="card-body">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-control" id="colorSelect">
+                        <option>Color 1</option>
+                        <option>Color 2</option>
+                        <option>Color 3</option>
+                        <option>Color 4</option>
+                        <option>Color 5</option>
                     </select>
                 </div>
             </div>
@@ -120,17 +114,18 @@
 
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Price</div>
                 <div style="margin: auto;" class="card-body">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                    <input class="form-control" type="text" placeholder="Suggested Price">
+
                 </div>
             </div>
         </div>
 
     </div>
+
+    <div style="text-align: center;">
+        <a class="btn btn-secondary btn-lg" href="Results.html" role="button">Build Keyboard</a>
+    </div>
+
     <!-- Divider-->
     <hr>
 </div>
