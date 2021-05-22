@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CapstoneTest</title>
+    <title>ProductCreator</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
 </head>
 <body>
 
@@ -35,16 +33,20 @@
 </div>
 
 <div class="container">
-    <div class="row">
+    <form class="row g-3 needs-validation" action="Results.html" novalidate>
         <div class="col-md-4">
             <div class="card mb-4 box-shadow">
                 <img style="filter: blur(2px); -webkit-filter: blur(2px); height: 225px; width: 100%; display: block;" class="card-img-top" src="./img/Chassis.jpg" data-holder-rendered="true">
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Chassis</div>
                 <div style="margin: auto;" class="card-body">
-                    <select class="form-control" id="chassisSelect">
+                    <select class="form-control" id="chassisSelect" required>
+                        <option selected disabled value="">Choose...</option>
                         <option>Plastic</option>
                         <option>Metal</option>
                     </select>
+                    <div class="invalid-feedback">
+                        Please select a valid chassis option.
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,10 +56,14 @@
                 <img style="filter: blur(1px); -webkit-filter: blur(1px); height: 225px; width: 100%; display: block;" class="card-img-top" src="./img/Switches.jpg" data-holder-rendered="true">
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.5); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Switches</div>
                 <div style="margin: auto;" class="card-body">
-                    <select class="form-control" id="switchSelect">
+                    <select class="form-control" id="switchSelect" required>
+                        <option selected disabled value="">Choose...</option>
                         <option>Cherry MX Brown</option>
                         <option>Cherry MX Blue</option>
                     </select>
+                    <div class="invalid-feedback">
+                        Please select a valid switch option.
+                    </div>
                 </div>
             </div>
         </div>
@@ -68,10 +74,14 @@
 
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Keycaps</div>
                 <div style="margin: auto;" class="card-body">
-                    <select class="form-control" id="capSelect">
+                    <select class="form-control" id="capSelect" required>
+                        <option selected disabled value="">Choose...</option>
                         <option>ABS</option>
                         <option>PBT</option>
                     </select>
+                    <div class="invalid-feedback">
+                        Please select a valid keycap option.
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,11 +92,15 @@
 
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Lighting</div>
                 <div style="margin: auto;" class="card-body">
-                    <select class="form-control" id="lightSelect">
+                    <select class="form-control" id="lightSelect" required>
+                        <option selected disabled value="">Choose...</option>
                         <option>None</option>
                         <option>White</option>
                         <option>RGB</option>
                     </select>
+                    <div class="invalid-feedback">
+                        Please select a valid lighting option.
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,13 +111,17 @@
 
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Color</div>
                 <div style="margin: auto;" class="card-body">
-                    <select class="form-control" id="colorSelect">
+                    <select class="form-control" id="colorSelect" required>
+                        <option selected disabled value="">Choose...</option>
                         <option>Color 1</option>
                         <option>Color 2</option>
                         <option>Color 3</option>
                         <option>Color 4</option>
                         <option>Color 5</option>
                     </select>
+                    <div class="invalid-feedback">
+                        Please select a valid color.
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,17 +132,43 @@
 
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Price</div>
                 <div style="margin: auto;" class="card-body">
-                    <input class="form-control" type="text" placeholder="Suggested Price">
-
+                    <input class="form-control" type="text" placeholder="Suggested Price" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid price.
+                    </div>
                 </div>
             </div>
         </div>
 
-    </div>
+        <button id="submitButton" style="margin: auto;" class="btn btn-secondary btn-lg" type="submit">Build Keyboard</button>
+    </form>
 
-    <div style="text-align: center;">
-        <a class="btn btn-secondary btn-lg" href="Results.html" role="button">Build Keyboard</a>
-    </div>
+
+    <script>
+
+        document.getElementById('submitButton').onclick=checkInput();
+
+         function checkInput() {
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        }
+
+    </script>
 
     <!-- Divider-->
     <hr>
