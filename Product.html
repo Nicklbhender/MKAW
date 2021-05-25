@@ -110,15 +110,12 @@
             <div class="card mb-4 box-shadow">
                 <img style="filter: blur(1px); -webkit-filter: blur(px); height: 225px; width: 100%; display: block;" class="card-img-top" src="./img/Color.jpg" data-holder-rendered="true">
 
-                <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Color</div>
+                <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Hot-Swap</div>
                 <div style="margin: auto;" class="card-body">
-                    <select class="form-control" id="colorSelect" onchange="selectFrom(id)" required>
+                    <select class="form-control" id="swapSelect" onchange="selectFrom(id)" required>
                         <option selected disabled value="">Choose...</option>
-                        <option>Color 1</option>
-                        <option>Color 2</option>
-                        <option>Color 3</option>
-                        <option>Color 4</option>
-                        <option>Color 5</option>
+                        <option>Yes</option>
+                        <option>No</option>
                     </select>
                     <div class="invalid-feedback">
                         Please select a valid color.
@@ -133,7 +130,13 @@
 
                 <div style="background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.4); color: white; font-size: 25px; border: 3px solid #f1f1f1; position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 40%; padding: 2px; text-align: center" class="centered">Price</div>
                 <div style="margin: auto;" class="card-body">
-                    <input class="form-control" id="priceSelect" type="text" placeholder="Suggested Price" onchange="selectFrom(id)" required>
+                    <select class="form-control" id="priceSelect" onchange="selectFrom(id)" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>$50-$100</option>
+                        <option>$100-$150</option>
+                        <option>$150-$200</option>
+                        <option>$200+</option>
+                    </select>
                     <div class="invalid-feedback">
                         Please provide a valid price.
                     </div>
@@ -146,7 +149,7 @@
 
 
     <script>
-        var chassis, switches, keycaps, lighting, color, price;
+        var chassis, switches, keycaps, lighting, hSwap, price;
         var check = "yes";
 
         function selectFrom(id) {
@@ -167,9 +170,9 @@
                     lighting = document.getElementById(id).value;
                     sessionStorage.setItem("lighting", lighting);
                     break;
-                case 'colorSelect':
-                    color = document.getElementById(id).value;
-                    sessionStorage.setItem("color", color);
+                case 'swapSelect':
+                    hSwap = document.getElementById(id).value;
+                    sessionStorage.setItem("hSwap", hSwap);
                     break;
                 case 'priceSelect':
                     price = document.getElementById(id).value;

@@ -11,15 +11,17 @@ DBOpenRequest.onsuccess = e => {
 
     // Dataset
     var data = [
-        { kID: 1, kName: "Model S", manufacturer: "Das Keyboard", chassisType: "Plastic", switchType: "Cherry MX Blue", capType: "ABS", lightType: "None", colorType: "Black", cost: 139 },
-        { kID: 2, kName: "Model S", manufacturer: "Das Keyboard", chassisType: "Plastic", switchType: "Cherry MX Brown", capType: "ABS", lightType: "None", colorType: "Black", cost: 139 },
-        { kID: 3, kName: "4Q", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Blue", capType: "ABS", lightType: "RGB", colorType: "Black", cost: 199 },
-        { kID: 4, kName: "4Q", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Brown", capType: "ABS", lightType: "RGB", colorType: "Black", cost: 199 },
-        { kID: 5, kName: "Prime 13", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Brown", capType: "ABS", lightType: "White", colorType: "Black", cost: 129 },
-        { kID: 6, kName: "4 Professional", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Brown", capType: "ABS", lightType: "None", colorType: "Black", cost: 169 },
-        { kID: 7, kName: "4 Professional", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Blue", capType: "ABS", lightType: "None", colorType: "Black", cost: 169 },
+        { kID: 1, kName: "Model S", manufacturer: "Das Keyboard", chassisType: "Plastic", switchType: "Cherry MX Blue", capType: "ABS", lightType: "None", swapType: "No", cost: 139 },
+        { kID: 2, kName: "Model S", manufacturer: "Das Keyboard", chassisType: "Plastic", switchType: "Cherry MX Brown", capType: "ABS", lightType: "None", swapType: "No", cost: 139 },
+        { kID: 3, kName: "4Q", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Blue", capType: "ABS", lightType: "RGB", swapType: "No", cost: 199 },
+        { kID: 4, kName: "4Q", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Brown", capType: "ABS", lightType: "RGB", swapType: "No", cost: 199 },
+        { kID: 5, kName: "Prime 13", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Brown", capType: "ABS", lightType: "White", swapType: "No", cost: 129 },
+        { kID: 6, kName: "4 Professional", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Brown", capType: "ABS", lightType: "None", swapType: "No", cost: 169 },
+        { kID: 7, kName: "4 Professional", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Blue", capType: "ABS", lightType: "None", swapType: "No", cost: 169 },
     ];
+    /* Candidate keyboards
 
+     */
 // open a read/write db transaction, ready for adding the data
     var transaction = db.transaction(["Keyboards"], "readwrite");
 
@@ -79,8 +81,10 @@ var chassis = sessionStorage.getItem("chassisType");
 var switches = sessionStorage.getItem("switchType");
 var keycaps = sessionStorage.getItem("capType");
 var lighting = sessionStorage.getItem("lighting");
-var color = sessionStorage.getItem("color");
+var hSwap = sessionStorage.getItem("hSwap");
 var price = sessionStorage.getItem("price");
+
+
 
 
 
