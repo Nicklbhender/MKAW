@@ -1,3 +1,20 @@
+// Retrieve variables from session storage
+var chassis = sessionStorage.getItem("chassisType");
+var switches = sessionStorage.getItem("switchType");
+var keycaps = sessionStorage.getItem("capType");
+var lighting = sessionStorage.getItem("lighting");
+var hSwap = sessionStorage.getItem("hSwap");
+var price = sessionStorage.getItem("price");
+var minPrice, maxPrice;
+
+// Create Filtering Arrays
+var priceArr = [];
+var switchArr = new Array(80);
+var lightArr = new Array(80);
+var chassisArr = new Array(80);
+var swapArr = new Array(80);
+var capArr = new Array(80);
+
 // Database Creation Using IndexedDB
 var db;
 
@@ -19,9 +36,7 @@ DBOpenRequest.onsuccess = e => {
         { kID: 6, kName: "4 Professional", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Brown", capType: "ABS", lightType: "None", swapType: "No", cost: 169 },
         { kID: 7, kName: "4 Professional", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Blue", capType: "ABS", lightType: "None", swapType: "No", cost: 169 },
     ];
-    /* Candidate keyboards
 
-     */
 // open a read/write db transaction, ready for adding the data
     var transaction = db.transaction(["Keyboards"], "readwrite");
 
@@ -36,15 +51,88 @@ DBOpenRequest.onsuccess = e => {
 
 // create an object store on the transaction
     var objectStore = transaction.objectStore("Keyboards");
-// make a request to add our newItem object to the object store
 
 
     for(let i = 0; i < 7; i++) {
+        // Request to add data object to the object store
         var objectStoreRequest = objectStore.add(data[i]);
         objectStoreRequest.onsuccess = function(event) {
             console.log("Request Successful");
         }
     }
+
+    // Get min and max price ranges for price filtering
+    switch(price) {
+        case "$50-$100":
+            minPrice = 50;
+            maxPrice = 100;
+            break;
+        case "$100-$150":
+            minPrice = 100;
+            maxPrice = 150;
+            break;
+        case "$150-$200":
+            minPrice = 150;
+            maxPrice = 200;
+            break;
+        case "$200+":
+            minPrice = 200;
+            maxPrice = 1000;
+            break;
+        default:
+            minPrice = 100;
+            maxPrice = 150;
+            break;
+    }
+
+    // Blank arrBoard object
+
+
+    transaction = db.transaction(["Keyboards"], "readonly");
+    objectStore = transaction.objectStore("Keyboards");
+    objectStoreRequest = objectStore.openCursor();
+
+    function readData(callback) {
+        // On successful request...
+        objectStoreRequest.onsuccess = e => {
+            var cursor = e.target.result;
+            // If valid target...
+            if(cursor) {
+                // Assign cursor values to arrBoard object
+                if(cursor.value.cost > minPrice && cursor.value.cost < maxPrice) {
+
+                    var arrBoard = {
+                        "kName": cursor.value.kName,
+                        "manufacturer": cursor.value.manufacturer,
+                        "chassisType": cursor.value.chassisType,
+                        "switchType": cursor.value.switchType,
+                        "capType": cursor.value.capType,
+                        "lightType": cursor.value.lightType,
+                        "swapType": cursor.value.swapType,
+                        "cost": cursor.value.cost
+                    }
+
+                    // Push arrBoard object to price array
+                    priceArr.push(arrBoard);
+                }
+                // Increment cursor
+                cursor.continue();
+            } else {
+                callback(priceArr);
+            }
+        }
+    }
+
+    readData(function (priceArr) {
+        priceArr.forEach(prnt);
+
+        function prnt(item) {
+            alert(`Name: ${item.kName} Switch: ${item.switchType} `)
+        }
+    })
+
+
+
 
 };
 
@@ -67,7 +155,7 @@ DBOpenRequest.onupgradeneeded = e => {
     objectStore.createIndex("switchType", "switchType", { unique: false });
     objectStore.createIndex("capType", "capType", { unique: false });
     objectStore.createIndex("lightType", "lightType", { unique: false });
-    objectStore.createIndex("colorType", "colorType", { unique: false });
+    objectStore.createIndex("swapType", "swapType", { unique: false });
     objectStore.createIndex("cost", "cost", { unique: false });
 
     console.log("Object Store Created");
@@ -76,13 +164,7 @@ DBOpenRequest.onupgradeneeded = e => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Comparison Section
 
-// Retrieve variables from session storage
-var chassis = sessionStorage.getItem("chassisType");
-var switches = sessionStorage.getItem("switchType");
-var keycaps = sessionStorage.getItem("capType");
-var lighting = sessionStorage.getItem("lighting");
-var hSwap = sessionStorage.getItem("hSwap");
-var price = sessionStorage.getItem("price");
+
 
 
 
