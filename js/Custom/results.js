@@ -15,6 +15,9 @@ var chassisArr = new Array(80);
 var swapArr = new Array(80);
 var capArr = new Array(80);
 
+var displayLimit = 0;
+var displayArr = [];
+
 // Database Creation Using IndexedDB
 var db;
 
@@ -85,7 +88,7 @@ DBOpenRequest.onsuccess = e => {
             break;
     }
 
-    // Blank arrBoard object
+
 
 
     transaction = db.transaction(["Keyboards"], "readonly");
@@ -100,7 +103,7 @@ DBOpenRequest.onsuccess = e => {
             if(cursor) {
                 // Assign cursor values to arrBoard object
                 if(cursor.value.cost > minPrice && cursor.value.cost < maxPrice) {
-
+                    // Assign cursor values to arrBoard object
                     var arrBoard = {
                         "kName": cursor.value.kName,
                         "manufacturer": cursor.value.manufacturer,
@@ -114,26 +117,119 @@ DBOpenRequest.onsuccess = e => {
 
                     // Push arrBoard object to price array
                     priceArr.push(arrBoard);
+
                 }
                 // Increment cursor
                 cursor.continue();
             } else {
+                // Callback
                 callback(priceArr);
             }
         }
     }
 
     readData(function (priceArr) {
-        priceArr.forEach(prnt);
 
-        function prnt(item) {
-            alert(`Name: ${item.kName} Switch: ${item.switchType} `)
+        priceArr.forEach(switchFilter);
+
+        function switchFilter(item) {
+            if(item.switchType === switches) {
+                switchArr.push(item);
+            }
         }
+
+        switchArr.forEach(lightFilter);
+
+        function lightFilter(item) {
+            if(item.lightType === lighting) {
+                lightArr.push(item);
+            }
+        }
+
+        lightArr.forEach(chassisFilter);
+
+        function chassisFilter(item) {
+            if(item.chassisType === chassis) {
+                chassisArr.push(item);
+            }
+        }
+
+        chassisArr.forEach(swapFilter);
+
+        function swapFilter(item) {
+            if(item.swapType === hSwap) {
+                swapArr.push(item);
+            }
+        }
+
+        swapArr.forEach(capFilter);
+
+        function capFilter(item) {
+            if(item.capType === keycaps) {
+                capArr.push(item);
+            }
+        }
+
+        // Build Carousel
+
+
+        // Add elements to carousel
+        capArr.every(v => {
+            if(displayLimit === 5) {
+                return false;
+            }
+            displayArr.push(v);
+            displayLimit++;
+        });
+
+        swapArr.every(v => {
+            if (displayLimit === 5) {
+                return false;
+            }
+            displayArr.push(v);
+            displayLimit++;
+        });
+
+        chassisArr.every(v => {
+            if(displayLimit === 5) {
+                return false;
+            }
+            displayArr.push(v);
+            displayLimit++;
+        });
+
+        lightArr.every(v => {
+            if(displayLimit === 5) {
+                return false;
+            }
+            displayArr.push(v);
+            displayLimit++;
+        });
+
+        switchArr.every(v => {
+            if(displayLimit === 5) {
+                return false;
+            }
+            displayArr.push(v);
+            displayLimit++;
+        });
+
+        displayArr = displayArr.filter((thing, index, self) =>
+            index === self.findIndex((t) => (
+                t.place === thing.place && t.name === thing.name
+            ))
+        )
+
+        displayArr.forEach(showKeyboards);
+
+        function showKeyboards(item) {
+            alert(item.kName);
+        }
+
+
+        // Start generating boostrap elements
+
     })
-
-
-
-
 };
 
 // On upgrade needed (acts like a first time setup in our case)
