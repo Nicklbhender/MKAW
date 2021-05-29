@@ -38,6 +38,34 @@ DBOpenRequest.onsuccess = e => {
         { kID: 5, kName: "Prime 13", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Brown", capType: "ABS", lightType: "White", swapType: "No", cost: 129 },
         { kID: 6, kName: "4 Professional", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Brown", capType: "ABS", lightType: "None", swapType: "No", cost: 169 },
         { kID: 7, kName: "4 Professional", manufacturer: "Das Keyboard", chassisType: "Metal", switchType: "Cherry MX Blue", capType: "ABS", lightType: "None", swapType: "No", cost: 169 },
+
+        { kID: 8, kName: "VA104C Calculator", manufacturer: "Varmilo", chassisType: "Plastic", switchType: "Cherry MX Blue", capType: "ABS", lightType: "None", swapType: "No", cost: 156 },
+        { kID: 9, kName: "VA104S Phoenix", manufacturer: "Varmilo", chassisType: "Plastic", switchType: "Cherry MX Red", capType: "ABS", lightType: "None", swapType: "No", cost: 168 },
+        { kID: 10, kName: "VA108M Yakumo", manufacturer: "Varmilo", chassisType: "Plastic", switchType: "Cherry MX Red", capType: "PBT", lightType: "White", swapType: "No", cost: 152 },
+        { kID: 11, kName: "VA108M Summit", manufacturer: "Varmilo", chassisType: "Plastic", switchType: "Cherry MX Red", capType: "PBT", lightType: "White", swapType: "No", cost: 163 },
+        { kID: 12, kName: "MA108M/VA108M Sea Melody", manufacturer: "Varmilio", chassisType: "Plastic", switchType: "Cherry MX Blue", capType: "PBT", lightType: "None", swapType: "No", cost: 147 },
+
+        { kID: 13, kName: "FC660M", manufacturer: "Leopold", chassisType: "Plastic", switchType: "Cherry MX Brown", capType: "PBT", lightType: "None", swapType: "No", cost: 109 },
+        { kID: 14, kName: "FC900R", manufacturer: "Leopold", chassisType: "Plastic", switchType: "Cherry MX Black", capType: "PBT", lightType: "None", swapType: "No", cost: 124 },
+        { kID: 15, kName: "FC980M", manufacturer: "Leopold", chassisType: "Plastic", switchType: "Cherry MX Red", capType: "PBT", lightType: "None", swapType: "No", cost: 119 },
+
+        { kID: 16, kName: "K1", manufacturer: "Keychron", chassisType: "Plastic", switchType: "Gateron Blue", capType: "ABS", lightType: "White", swapType: "No", cost: 74 },
+        { kID: 17, kName: "K1", manufacturer: "Keychron", chassisType: "Plastic", switchType: "Gateron Red", capType: "ABS", lightType: "RGB", swapType: "No", cost: 99 },
+        { kID: 18, kName: "C1", manufacturer: "Keychron", chassisType: "Plastic", switchType: "Gateron Blue", capType: "ABS", lightType: "None", swapType: "No", cost: 39},
+        { kID: 19, kName: "K6", manufacturer: "Keychron", chassisType: "Plastic", switchType: "Gateron Brown", capType: "ABS", lightType: "RGB", swapType: "No", cost: 69 },
+        { kID: 20, kName: "K2", manufacturer: "Keychron", chassisType: "Plastic", switchType: "Gateron Blue", capType: "ABS", lightType: "RGB", swapType: "No", cost: 79 },
+
+        { kID: 21, kName: "AW510K", manufacturer: "Alienware", chassisType: "Plastic", switchType: "Cherry MX Red", capType: "ABS", lightType: "RGB", swapType: "No", cost: 120 },
+
+        { kID: 22, kName: "GMMK", manufacturer: "Glorious", chassisType: "Plastic", switchType: "Glorious Panda", capType: "ABS", lightType: "RGB", swapType: "No", cost: 110},
+
+        { kID: 23, kName: "Streak Wired", manufacturer: "Fnatic", chassisType: "Plastic", switchType: "Cherry MX  Red", capType: "ABS", lightType: "RGB", swapType: "No", cost: 50 },
+
+        { kID: 24, kName: "K70", manufacturer: "Corsair", chassisType: "Plastic", switchType: "Cherry MX Red", capType: "ABS", lightType: "RGB", swapType: "No", cost: 100 },
+        { kID: 25, kName: "Gaming K70", manufacturer: "Corsair", chassisType: "Plastic", switchType: "Cherry MX Red", capType: "ABS", lightType: "RGB", swapType: "No", cost: 170 },
+
+        { kID: 26, kName: "Majestouch Convertible 2", manufacturer: "Filco", chassisType: "Plastic", switchType: "Cherry MX Red", capType: "ABS", lightType: "None", swapType: "No", cost: 170 },
+        { kID: 27, kName: "Majestouch Ninja", manufacturer: "Filco", chassisType: "Plastic", switchType: "Cherry MX Blue", capType: "ABS", lightType: "None", swapType: "No", cost: 159 }
     ];
 
 // open a read/write db transaction, ready for adding the data
@@ -56,7 +84,7 @@ DBOpenRequest.onsuccess = e => {
     var objectStore = transaction.objectStore("Keyboards");
 
 
-    for(let i = 0; i < 7; i++) {
+    for(let i = 0; i < 27; i++) {
         // Request to add data object to the object store
         var objectStoreRequest = objectStore.add(data[i]);
         objectStoreRequest.onsuccess = function(event) {
@@ -134,6 +162,7 @@ DBOpenRequest.onsuccess = e => {
 
         function switchFilter(item) {
             if(item.switchType === switches) {
+                //alert(item.kName);
                 switchArr.push(item);
             }
         }
@@ -142,6 +171,7 @@ DBOpenRequest.onsuccess = e => {
 
         function lightFilter(item) {
             if(item.lightType === lighting) {
+                //alert(item.kName);
                 lightArr.push(item);
             }
         }
@@ -150,11 +180,21 @@ DBOpenRequest.onsuccess = e => {
 
         function chassisFilter(item) {
             if(item.chassisType === chassis) {
+                //alert(item.kName);
                 chassisArr.push(item);
             }
         }
 
-        chassisArr.forEach(swapFilter);
+        chassisArr.forEach(capFilter);
+
+        function capFilter(item) {
+            if(item.capType === keycaps) {
+                //alert(item.kName);
+                capArr.push(item);
+            }
+        }
+
+        capArr.forEach(swapFilter);
 
         function swapFilter(item) {
             if(item.swapType === hSwap) {
@@ -162,68 +202,40 @@ DBOpenRequest.onsuccess = e => {
             }
         }
 
-        swapArr.forEach(capFilter);
-
-        function capFilter(item) {
-            if(item.capType === keycaps) {
-                capArr.push(item);
-            }
-        }
 
         // Build Carousel
 
 
         // Add elements to carousel
-        capArr.every(v => {
-            if(displayLimit === 5) {
-                return false;
-            }
-            displayArr.push(v);
-            displayLimit++;
-        });
 
-        swapArr.every(v => {
-            if (displayLimit === 5) {
-                return false;
-            }
-            displayArr.push(v);
-            displayLimit++;
-        });
+        swapArr.forEach(addToDisplay);
+        capArr.forEach(addToDisplay);
+        chassisArr.forEach(addToDisplay);
+        lightArr.forEach(addToDisplay);
+        switchArr.forEach(addToDisplay);
 
-        chassisArr.every(v => {
-            if(displayLimit === 5) {
-                return false;
-            }
-            displayArr.push(v);
-            displayLimit++;
-        });
 
-        lightArr.every(v => {
-            if(displayLimit === 5) {
-                return false;
-            }
-            displayArr.push(v);
-            displayLimit++;
-        });
+        function addToDisplay(item) {
+            displayArr.push(item);
+        }
 
-        switchArr.every(v => {
-            if(displayLimit === 5) {
-                return false;
-            }
-            displayArr.push(v);
-            displayLimit++;
-        });
 
         displayArr = displayArr.filter((thing, index, self) =>
             index === self.findIndex((t) => (
-                t.place === thing.place && t.name === thing.name
+                t.kName === thing.kName
             ))
-        )
+        );
 
-        displayArr.forEach(showKeyboards);
+        displayArr.forEach(displayBoards);
 
-        function showKeyboards(item) {
+        function displayBoards(item) {
+            if(displayLimit === 5) {
+                return false;
+            }
+
+
             alert(item.kName);
+            displayLimit++;
         }
 
 
