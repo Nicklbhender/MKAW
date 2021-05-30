@@ -17,6 +17,7 @@ var capArr = new Array(80);
 
 var displayLimit = 0;
 var displayArr = [];
+var manufacturerArr = [];
 
 // Database Creation Using IndexedDB
 var db;
@@ -162,7 +163,6 @@ DBOpenRequest.onsuccess = e => {
 
         function switchFilter(item) {
             if(item.switchType === switches) {
-                //alert(item.kName);
                 switchArr.push(item);
             }
         }
@@ -171,7 +171,6 @@ DBOpenRequest.onsuccess = e => {
 
         function lightFilter(item) {
             if(item.lightType === lighting) {
-                //alert(item.kName);
                 lightArr.push(item);
             }
         }
@@ -180,7 +179,6 @@ DBOpenRequest.onsuccess = e => {
 
         function chassisFilter(item) {
             if(item.chassisType === chassis) {
-                //alert(item.kName);
                 chassisArr.push(item);
             }
         }
@@ -189,7 +187,6 @@ DBOpenRequest.onsuccess = e => {
 
         function capFilter(item) {
             if(item.capType === keycaps) {
-                //alert(item.kName);
                 capArr.push(item);
             }
         }
@@ -202,44 +199,137 @@ DBOpenRequest.onsuccess = e => {
             }
         }
 
-
-        // Build Carousel
-
-
-        // Add elements to carousel
-
+        // Add items from each array to display array
         swapArr.forEach(addToDisplay);
         capArr.forEach(addToDisplay);
         chassisArr.forEach(addToDisplay);
         lightArr.forEach(addToDisplay);
         switchArr.forEach(addToDisplay);
 
-
+        // For-each loop to add items from filtered arrays to display arrays
         function addToDisplay(item) {
             displayArr.push(item);
         }
 
-
-        displayArr = displayArr.filter((thing, index, self) =>
-            index === self.findIndex((t) => (
-                t.kName === thing.kName
+        // Remove duplicates from display array
+        displayArr = displayArr.filter((board, index, self) =>
+            index === self.findIndex((k) => (
+                k.kName === board.kName
             ))
         );
 
+
+        var elementToAppend = "activeStart";
+
         displayArr.forEach(displayBoards);
 
+        // Remove duplicates from manufacturer array
+        manufacturerArr = manufacturerArr.filter((man, index, self) =>
+            index === self.findIndex((m) => (
+                m === man
+            ))
+        );
+
+        displayLimit = 0;
+        elementToAppend = "manufacturerStart";
+        manufacturerArr.forEach(displayManufacturer);
+
         function displayBoards(item) {
+            // If max item display limit reached, end loop
             if(displayLimit === 5) {
                 return false;
             }
+            // If display limit is 3, create new carousel slide
+            if(displayLimit === 3) {
+                var slide = document.createElement("div"),
+                    row = document.createElement("div");
 
+                slide.className = "carousel-item";
+                row.className = "row";
+                row.id = "secondStart";
 
-            alert(item.kName);
+                elementToAppend = row.id;
+                slide.appendChild(row);
+                document.getElementById("carousel1").appendChild(slide);
+            }
+
+            var wrapper = document.createElement("div"),
+                cardTop = document.createElement("div"),
+                image = document.createElement("img"),
+                cardBody = document.createElement("div"),
+                cardTitle = document.createElement("h4"),
+                cardText = document.createElement("p");
+
+            wrapper.className = "col-md-4 mb-3";
+
+            cardTop.className = "card";
+
+            image.className = "img-fluid";
+            image.src = "./img/MechKeys.jpg";
+            image.style.height = "225px";
+
+            cardTitle.className = "card-title";
+            cardTitle.textContent = item.manufacturer + " " + item.kName;
+            cardTitle.style.textAlign = "center";
+            cardTitle.style.margin = "15px";
+
+            cardBody.appendChild(cardTitle);
+            cardTop.appendChild(image);
+            cardTop.appendChild(cardBody);
+            wrapper.appendChild(cardTop);
+            document.getElementById(elementToAppend).appendChild(wrapper);
+
+            manufacturerArr.push(item.manufacturer);
             displayLimit++;
         }
 
+        function displayManufacturer(item) {
+            // If max item display limit reached, end loop
+            if(displayLimit === 5) {
+                return false;
+            }
+            // If display limit is 3, create new carousel slide
+            if(displayLimit === 3) {
+                var slide = document.createElement("div"),
+                    row = document.createElement("div");
 
-        // Start generating boostrap elements
+                slide.className = "carousel-item";
+                row.className = "row";
+                row.id = "manStart2";
+
+                elementToAppend = row.id;
+                slide.appendChild(row);
+                document.getElementById("carousel2").appendChild(slide);
+            }
+
+            var wrapper = document.createElement("div"),
+                cardTop = document.createElement("div"),
+                image = document.createElement("img"),
+                cardBody = document.createElement("div"),
+                cardTitle = document.createElement("h4");
+
+            wrapper.className = "col-md-4 mb-3";
+
+            cardTop.className = "card";
+
+            image.className = "img-fluid";
+            image.src = "./img/MechKeys.jpg";
+            image.style.height = "225px";
+
+            cardTitle.className = "card-title";
+            cardTitle.textContent = item;
+            cardTitle.style.textAlign = "center";
+            cardTitle.style.margin = "15px";
+
+            cardBody.appendChild(cardTitle);
+            cardTop.appendChild(image);
+            cardTop.appendChild(cardBody);
+            wrapper.appendChild(cardTop);
+            document.getElementById(elementToAppend).appendChild(wrapper);
+
+            manufacturerArr.push(item.manufacturer);
+            displayLimit++;
+        }
 
     })
 };
@@ -268,18 +358,3 @@ DBOpenRequest.onupgradeneeded = e => {
 
     console.log("Object Store Created");
 };
-// End of Database Section
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Comparison Section
-
-
-
-
-
-
-
-
-
-
-
-
